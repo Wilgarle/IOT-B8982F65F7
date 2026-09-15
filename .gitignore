@@ -6,3 +6,6 @@
 
 # Credenciales — NUNCA subir este archivo
 include/secrets.h
+
+# Espacio de trabajo personal de VS Code
+*.code-workspace
