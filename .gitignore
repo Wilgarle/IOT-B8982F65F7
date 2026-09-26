@@ -9,3 +9,9 @@ include/secrets.h
 
 # Espacio de trabajo personal de VS Code
 *.code-workspace
+
+# Entornos virtuales y cache de Python
+.venv/
+*/.venv/
+__pycache__/
+*.pyc

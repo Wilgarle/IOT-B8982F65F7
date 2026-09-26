@@ -20,7 +20,7 @@ COMANDO_NO_PERMITIDO = "REINICIAR"
 
 # Valores del ejemplo de la clase. Cada grupo puede sobrescribirlos con
 # variables de entorno para usar un broker o tema propio.
-MQTT_HOST = os.getenv("MQTT_HOST", "broker.hivemq.com")
+MQTT_HOST = os.getenv("MQTT_HOST", "192.168.229.1")
 MQTT_PORT = int(os.getenv("MQTT_PORT", "1883"))
 TOPIC_COMANDO = os.getenv(
     "MQTT_TOPIC_COMANDO", "iot/clase6/ejemplo/comando"
@@ -164,7 +164,7 @@ def publicar(comando, host, port, topic):
         mensaje.wait_for_publish(timeout=3)
         if not mensaje.is_published():
             raise TimeoutError("Tiempo agotado esperando la publicacion MQTT")
-        print(f"Comando publicado: {comando}")
+        print(f"COMANDO ENVIADO AL ESP32: {comando}")
         print(f"Tema: {topic}")
         print("La ejecucion se confirma al recibir el estado del ESP32.")
         return True

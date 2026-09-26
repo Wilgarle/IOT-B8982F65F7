@@ -17,7 +17,7 @@ import paho.mqtt.client as mqtt  # Libreria que implementa el cliente MQTT.
 
 # Valores del ejemplo de la clase. Cada grupo puede sobrescribirlos con
 # variables de entorno para usar un broker o tema propio.
-MQTT_HOST = os.getenv("MQTT_HOST", "broker.hivemq.com")
+MQTT_HOST = os.getenv("MQTT_HOST", "192.168.229.1")
 MQTT_PORT = int(os.getenv("MQTT_PORT", "1883"))
 TOPIC_TELEMETRIA = os.getenv(
     "MQTT_TOPIC_TELEMETRIA", "iot/clase6/ejemplo/telemetria"
@@ -129,7 +129,7 @@ def mostrar_estado(payload):
         contenido = json.dumps(estado, ensure_ascii=True, separators=(",", ":"))
     except json.JSONDecodeError:
         contenido = payload
-    print(f"[{datetime.now().isoformat(timespec='seconds')}] Estado: {contenido}")
+    print(f"ESTADO CONFIRMADO POR EL ESP32: {contenido}")
 
 
 def suscribir(host, port, topic_telemetria, topic_estado):
@@ -177,14 +177,9 @@ def suscribir(host, port, topic_telemetria, topic_estado):
                 return
 
             # Guardamos el dato validado y mostramos una vista resumida para
-            # que el estudiante pueda observar la llegada de mensajes.
+            # que se pueda observar la llegada de mensajes.
             HISTORIAL.append(datos)
-            print(
-                f"[{datetime.now().isoformat(timespec='seconds')}] "
-                f"{datos['variable']}={datos['value']} {datos['unit']} | "
-                f"modo={datos['mode']} alarma={datos['alarm']} "
-                f"secuencia={datos['sequence']}"
-            )
+            print(f"TELEMETRÍA RECIBIDA -> Peso: {datos['value']} {datos['unit']} | Modo: {datos['mode']} | Alarma: {datos['alarm']}")
             return
 
         if message.topic == topic_estado:
